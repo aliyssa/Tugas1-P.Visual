@@ -48,7 +48,7 @@ public class barang extends javax.swing.JFrame {
         String cariitem=txtcari.getText();
         
         try {
-            String sql = "SELECT * FROM barang where kd like '%" + cariitem +"%'or nm like '%" + cariitem + "%' order by kd asc";
+            String sql = "SELECT * FROM barang where kdbrg like '%" + cariitem +"%'or nmbrg like '%" + cariitem + "%' order by kdbrg asc";
             Statement stat = conn.createStatement();
             ResultSet hasil= stat.executeQuery(sql);
             while (hasil.next()){
@@ -354,7 +354,7 @@ public class barang extends javax.swing.JFrame {
 
     private void bubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bubahActionPerformed
       try{
-            String sql = "update barang set nm=?,jenis=?,hb=?,hj=? where kd='"+txtkd.getText()+"'";
+            String sql = "update barang set nmbrg=?,jenisbrg=?,hb=?,hj=? where kdbrg='"+txtkd.getText()+"'";
             PreparedStatement stat = conn.prepareStatement(sql);
             stat.setString(1, txtnm.getText());
             stat.setString(2, cbjenis.getSelectedItem().toString());
@@ -376,7 +376,7 @@ public class barang extends javax.swing.JFrame {
     private void bhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bhapusActionPerformed
         int ok = JOptionPane.showConfirmDialog(null, "hapus", "konfirmasi dialog", JOptionPane.YES_NO_OPTION);
         if (ok ==0){
-            String sql ="delete from barang where kd ='"+txtkd.getText()+"'";
+            String sql ="delete from barang where kdbrg ='"+txtkd.getText()+"'";
             try{
                 PreparedStatement stat= conn.prepareStatement(sql);
                 stat.executeUpdate();
@@ -401,7 +401,21 @@ public class barang extends javax.swing.JFrame {
     }//GEN-LAST:event_bkeluarActionPerformed
 
     private void bcariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcariActionPerformed
-        datatable();
+        int ok = JOptionPane.showConfirmDialog(null, "hapus", "konfirmasi dialog", JOptionPane.YES_NO_OPTION);
+        if (ok ==0){
+            String sql ="delete from barang where kdbrg ='"+txtkd.getText()+"'";
+            try{
+                PreparedStatement stat= conn.prepareStatement(sql);
+                stat.executeUpdate();
+                JOptionPane.showMessageDialog(null, "data berhasil dihapus");
+                kosong();
+                txtkd.requestFocus();
+            }
+            catch (SQLException e){
+                JOptionPane.showMessageDialog(null, "data gagal dihapus"+e);
+            }
+            datatable();
+        }
     }//GEN-LAST:event_bcariActionPerformed
 
     private void tblbarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblbarangMouseClicked
