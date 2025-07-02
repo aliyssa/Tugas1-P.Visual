@@ -174,6 +174,7 @@ public class kasir1 extends javax.swing.JFrame {
         });
 
         txtalamat.setColumns(20);
+        txtalamat.setFont(new java.awt.Font("Times New Roman", 0, 22)); // NOI18N
         txtalamat.setRows(5);
         jScrollPane1.setViewportView(txtalamat);
 
